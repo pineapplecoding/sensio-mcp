@@ -126,7 +126,7 @@ See [CUSTOMER_SETUP.md](./CUSTOMER_SETUP.md) for detailed configuration.
 ## 💬 Support
 
 - **Issues**: [GitHub Issues](https://github.com/pineapplecoding/sensio-mcp/issues)
-- **Sensio Support**: [sensio.co/support](https://sensio.co/support)
+- **Sensio Support**: [sensio.co/support]([https://sensio.co/support](https://www.sensio.co/inbound-enterprise))
 
 ## 📄 License
 
