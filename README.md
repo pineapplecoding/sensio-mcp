@@ -42,18 +42,24 @@ npm run build:standalone
 
 ```json
 {
+  "preferences": {
+    "sidebarMode": "chat",
+    "coworkScheduledTasksEnabled": false
+  },
   "mcpServers": {
     "sensio-air": {
       "command": "node",
       "args": ["/ABSOLUTE/PATH/TO/sensio-mcp/dist/index.js"],
       "env": {
-        "SENSIO_API_KEY": "your_api_key",
+        "SENSIO_API_KEY": "YOUR_API_KEY",
         "ALLOWED_DEVICE_SERIALS": "YOUR_SERIAL"
       }
     }
   }
 }
 ```
+
+Replace `/ABSOLUTE/PATH/TO/sensio-mcp` with your actual path (e.g., `/Users/yourname/sensio-mcp`)
 
 **Windsurf/Cline/Continue**: Use same config format above.
 
