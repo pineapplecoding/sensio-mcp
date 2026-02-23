@@ -7,7 +7,12 @@
 
 ## 🌟 What is this?
 
-This MCP (Model Context Protocol) server allows AI assistants to access your [Sensio Air](https://sensio.co) quality data in real-time. Ask natural language questions about your air quality, allergens, and environmental conditions directly in Claude Desktop, Windsurf, or any MCP-compatible AI assistant.
+This project provides **two ways** to connect your [Sensio Air](https://sensio.co) quality data to AI assistants:
+
+1. **MCP Server** (Claude Desktop, Windsurf, Cline, Continue) - Local, private, secure
+2. **Custom GPT** (ChatGPT) - Easy setup, shareable
+
+Ask natural language questions about your air quality, allergens, and environmental conditions directly in your AI assistant.
 
 **Example queries:**
 - "What's my indoor air quality right now?"
@@ -220,9 +225,32 @@ Get detailed allergen breakdown.
 - **No Third Parties**: No intermediary servers or data collection
 - **Device Control**: `ALLOWED_DEVICE_SERIALS` ensures you only access your own devices
 
-## 📚 Documentation
+## � ChatGPT Integration
+
+**ChatGPT doesn't support MCP**, but you can use **Custom GPTs with Actions** instead!
+
+### Quick Setup (5 minutes)
+
+1. Go to [ChatGPT GPT Editor](https://chat.openai.com/gpts/editor)
+2. Create a new GPT with the name "Sensio Air Quality Assistant"
+3. Add an Action using the OpenAPI schema from [CHATGPT_INTEGRATION.md](./CHATGPT_INTEGRATION.md)
+4. Test it: "What's my air quality for device IYYEMN?"
+
+**See [CHATGPT_INTEGRATION.md](./CHATGPT_INTEGRATION.md) for complete setup instructions.**
+
+### MCP vs Custom GPT
+
+| Feature | MCP (Claude/Windsurf) | Custom GPT (ChatGPT) |
+|---------|----------------------|---------------------|
+| Setup | Local config file | Web-based builder |
+| Privacy | Fully local | API via OpenAI |
+| Distribution | GitHub repo | Share GPT link |
+| Best for | Privacy, developers | Easy sharing |
+
+##  Documentation
 
 - [Customer Setup Guide](./CUSTOMER_SETUP.md) - Detailed step-by-step instructions
+- [ChatGPT Integration](./CHATGPT_INTEGRATION.md) - Custom GPT setup for ChatGPT
 - [Website Documentation](./WEBSITE_DOCUMENTATION.md) - Integration overview
 - [Examples](./EXAMPLES.md) - Sample queries and responses
 
