@@ -1,6 +1,5 @@
-import { config } from 'dotenv';
-
-config();
+// Environment variables are passed from AI assistant config or .env file
+// No dotenv import needed - it causes JSON parsing errors with its output
 
 export const CONFIG = {
   sensio: {

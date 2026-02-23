@@ -14,10 +14,9 @@ import {
   GetHistoryInputSchema,
   GetParticleBreakdownInputSchema,
 } from './types.js';
-import { config } from 'dotenv';
 
-config();
-
+// Environment variables are passed directly from the AI assistant config
+// No need for dotenv - it causes JSON parsing errors with its output
 const SENSIO_API_KEY = process.env.SENSIO_API_KEY || '';
 const ALLOWED_DEVICE_SERIALS = process.env.ALLOWED_DEVICE_SERIALS?.split(',') || [];
 
@@ -204,7 +203,9 @@ class SensioMCPServerStandalone {
             
             for (const record of rawData) {
               const existing = deviceMap.get(record.device_serial);
-              if (!existing || new Date(record.timestamp) > new Date(existing.timestamp)) {
+              const recordTime = record.sensor_data?.sensor_date_time || record.request_date_time;
+              const existingTime = existing?.sensor_data?.sensor_date_time || existing?.request_date_time;
+              if (!existing || new Date(recordTime) > new Date(existingTime)) {
                 deviceMap.set(record.device_serial, record);
               }
             }

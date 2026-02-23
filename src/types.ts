@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const DeviceSerialSchema = z.string().regex(/^SA\d+$/, 'Device serial must start with SA followed by numbers');
+export const DeviceSerialSchema = z.string().min(1, 'Device serial is required');
 
 export const IndexSchema = z.object({
   index: z.number(),
@@ -61,37 +61,30 @@ export const GetParticleBreakdownInputSchema = z.object({
 
 export interface SensioApiResponse {
   device_serial: string;
-  online: boolean;
+  is_device_online: boolean;
   time_since_last_reading: string | null;
-  timestamp: string;
-  temperature: number | null;
-  humidity: number | null;
-  co2: number | null;
-  voc: number | null;
-  co2_index: number | null;
-  co2_verbal: string | null;
-  co2_color: string | null;
-  voc_index: number | null;
-  voc_verbal: string | null;
-  voc_color: string | null;
-  pollution_index: number | null;
-  pollution_verbal: string | null;
-  pollution_color: string | null;
-  ml_allergen_index_pollen: number | null;
-  ml_allergen_verbal_pollen: string | null;
-  ml_allergen_color_pollen: string | null;
-  ml_allergen_index_mites: number | null;
-  ml_allergen_verbal_mites: string | null;
-  ml_allergen_color_mites: string | null;
-  ml_allergen_index_dander: number | null;
-  ml_allergen_verbal_dander: string | null;
-  ml_allergen_color_dander: string | null;
-  ml_allergen_index_mold: number | null;
-  ml_allergen_verbal_mold: string | null;
-  ml_allergen_color_mold: string | null;
-  ml_allergen_index: number | null;
-  ml_allergen_verbal: string | null;
-  ml_allergen_color: string | null;
+  request_date_time: string;
+  sensor_data: {
+    sensor_date_time: string;
+    temperature: number | null;
+    humidity: number | null;
+    co2: number | null;
+    voc: number | null;
+  };
+  sensor_indices: {
+    co2: { index: number; verbal: string; color: string } | null;
+    voc: { index: number; verbal: string; color: string } | null;
+    pollution: { index: number; verbal: string; color: string } | null;
+    temperature: number | null;
+    humidity: number | null;
+  };
+  ml_particle_indices?: {
+    pollen: { index: number; verbal: string; color: string } | null;
+    mites: { index: number; verbal: string; color: string } | null;
+    dander: { index: number; verbal: string; color: string } | null;
+    mold: { index: number; verbal: string; color: string } | null;
+    allergen: { index: number; verbal: string; color: string } | null;
+  };
   ml_particle_classes?: Record<string, any>;
 }
 

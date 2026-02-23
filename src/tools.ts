@@ -42,7 +42,9 @@ export class SensioTools {
     const deviceMap = new Map<string, SensioApiResponse>();
     for (const record of rawData) {
       const existing = deviceMap.get(record.device_serial);
-      if (!existing || new Date(record.timestamp) > new Date(existing.timestamp)) {
+      const recordTime = record.sensor_data?.sensor_date_time || record.request_date_time;
+      const existingTime = existing?.sensor_data?.sensor_date_time || existing?.request_date_time || '';
+      if (!existing || new Date(recordTime) > new Date(existingTime)) {
         deviceMap.set(record.device_serial, record);
       }
     }

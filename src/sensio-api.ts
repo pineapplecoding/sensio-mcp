@@ -42,70 +42,38 @@ export class SensioApiClient {
   normalizeReading(raw: SensioApiResponse): NormalizedReading {
     return {
       device_serial: raw.device_serial,
-      timestamp: raw.timestamp,
-      online: raw.online,
+      timestamp: raw.sensor_data?.sensor_date_time || raw.request_date_time,
+      online: raw.is_device_online,
       time_since_last_reading: raw.time_since_last_reading,
       sensor: {
-        temperature_c: raw.temperature,
-        humidity_pct: raw.humidity,
-        co2_ppm: raw.co2,
-        voc: raw.voc,
+        temperature_c: raw.sensor_data?.temperature || null,
+        humidity_pct: raw.sensor_data?.humidity || null,
+        co2_ppm: raw.sensor_data?.co2 || null,
+        voc: raw.sensor_data?.voc || null,
       },
       indices: {
-        co2: raw.co2_index !== null ? {
-          index: raw.co2_index,
-          verbal: raw.co2_verbal || '',
-          color: raw.co2_color || '',
-        } : null,
-        voc: raw.voc_index !== null ? {
-          index: raw.voc_index,
-          verbal: raw.voc_verbal || '',
-          color: raw.voc_color || '',
-        } : null,
-        pollution: raw.pollution_index !== null ? {
-          index: raw.pollution_index,
-          verbal: raw.pollution_verbal || '',
-          color: raw.pollution_color || '',
-        } : null,
+        co2: raw.sensor_indices?.co2 || null,
+        voc: raw.sensor_indices?.voc || null,
+        pollution: raw.sensor_indices?.pollution || null,
       },
       allergens: {
-        pollen: raw.ml_allergen_index_pollen !== null ? {
-          index: raw.ml_allergen_index_pollen,
-          verbal: raw.ml_allergen_verbal_pollen || '',
-          color: raw.ml_allergen_color_pollen || '',
-        } : null,
-        mites: raw.ml_allergen_index_mites !== null ? {
-          index: raw.ml_allergen_index_mites,
-          verbal: raw.ml_allergen_verbal_mites || '',
-          color: raw.ml_allergen_color_mites || '',
-        } : null,
-        dander: raw.ml_allergen_index_dander !== null ? {
-          index: raw.ml_allergen_index_dander,
-          verbal: raw.ml_allergen_verbal_dander || '',
-          color: raw.ml_allergen_color_dander || '',
-        } : null,
-        mold: raw.ml_allergen_index_mold !== null ? {
-          index: raw.ml_allergen_index_mold,
-          verbal: raw.ml_allergen_verbal_mold || '',
-          color: raw.ml_allergen_color_mold || '',
-        } : null,
-        allergen: raw.ml_allergen_index !== null ? {
-          index: raw.ml_allergen_index,
-          verbal: raw.ml_allergen_verbal || '',
-          color: raw.ml_allergen_color || '',
-        } : null,
+        pollen: raw.ml_particle_indices?.pollen || null,
+        mites: raw.ml_particle_indices?.mites || null,
+        dander: raw.ml_particle_indices?.dander || null,
+        mold: raw.ml_particle_indices?.mold || null,
+        allergen: raw.ml_particle_indices?.allergen || null,
       },
     };
   }
 
   toHistoryPoint(raw: SensioApiResponse): HistoryPoint {
     return {
-      t: raw.timestamp,
-      co2_ppm: raw.co2,
-      voc: raw.voc,
-      temperature_c: raw.temperature,
-      humidity_pct: raw.humidity,
-      allergen_index: raw.ml_allergen_index,
+      t: raw.sensor_data?.sensor_date_time || raw.request_date_time,
+      co2_ppm: raw.sensor_data?.co2 || null,
+      voc: raw.sensor_data?.voc || null,
+      temperature_c: raw.sensor_data?.temperature || null,
+      humidity_pct: raw.sensor_data?.humidity || null,
+      allergen_index: raw.ml_particle_indices?.allergen?.index || null,
     };
   }
 
