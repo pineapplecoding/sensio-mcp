@@ -25,9 +25,6 @@ export const CONFIG = {
 export function validateConfig(): void {
   const required = [
     { key: 'SENSIO_API_KEY', value: CONFIG.sensio.apiKey },
-    { key: 'SENSIO_USER_ID', value: CONFIG.sensio.userId },
-    { key: 'SUPABASE_URL', value: CONFIG.supabase.url },
-    { key: 'SUPABASE_SERVICE_KEY', value: CONFIG.supabase.serviceKey },
   ];
 
   const missing = required.filter(({ value }) => !value);

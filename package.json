@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:standalone",
     "build:standalone": "tsc && cp dist/index-standalone.js dist/index.js",
     "build:supabase": "tsc && cp dist/index-supabase.js dist/index.js",
     "dev": "tsx watch src/index.ts",
