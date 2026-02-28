@@ -7,7 +7,7 @@ import {
   ListToolsRequestSchema,
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { validateConfig } from './config.js';
+import { CONFIG, validateConfig } from './config.js';
 import { sensioTools } from './tools.js';
 import {
   ListDeviceSerialsInputSchema,
@@ -118,7 +118,7 @@ const TOOLS: Tool[] = [
 
 class SensioMCPServer {
   private server: Server;
-  private defaultUserId: string = 'demo-user';
+  private userId: string = CONFIG.sensio.userId;
 
   constructor() {
     this.server = new Server(
@@ -150,25 +150,25 @@ class SensioMCPServer {
         switch (name) {
           case 'sensio_list_device_serials': {
             const validated = ListDeviceSerialsInputSchema.parse(args);
-            result = await sensioTools.listDeviceSerials(this.defaultUserId);
+            result = await sensioTools.listDeviceSerials(this.userId);
             break;
           }
 
           case 'sensio_get_latest': {
             const validated = GetLatestInputSchema.parse(args);
-            result = await sensioTools.getLatest(this.defaultUserId, validated);
+            result = await sensioTools.getLatest(this.userId, validated);
             break;
           }
 
           case 'sensio_get_history': {
             const validated = GetHistoryInputSchema.parse(args);
-            result = await sensioTools.getHistory(this.defaultUserId, validated);
+            result = await sensioTools.getHistory(this.userId, validated);
             break;
           }
 
           case 'sensio_get_particle_breakdown': {
             const validated = GetParticleBreakdownInputSchema.parse(args);
-            result = await sensioTools.getParticleBreakdown(this.defaultUserId, validated);
+            result = await sensioTools.getParticleBreakdown(this.userId, validated);
             break;
           }
 

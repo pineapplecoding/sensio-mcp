@@ -13,12 +13,13 @@ import {
   GetHistoryInputSchema,
   GetParticleBreakdownInputSchema,
 } from './types.js';
-import { config } from 'dotenv';
 
-config();
-
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://zgmpigncjmpxoyunjgit.supabase.co';
+const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const ALLOWED_DEVICE_SERIALS = process.env.ALLOWED_DEVICE_SERIALS?.split(',') || [];
+
+if (!SUPABASE_URL) {
+  throw new Error('SUPABASE_URL environment variable is required');
+}
 
 const TOOLS: Tool[] = [
   {

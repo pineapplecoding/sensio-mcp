@@ -5,6 +5,7 @@ export const CONFIG = {
   sensio: {
     apiUrl: process.env.SENSIO_API_URL || 'https://mlv3.sensioair.com/api/indoor_data/',
     apiKey: process.env.SENSIO_API_KEY || '',
+    userId: process.env.SENSIO_USER_ID || '',
   },
   supabase: {
     url: process.env.SUPABASE_URL || '',
@@ -24,6 +25,7 @@ export const CONFIG = {
 export function validateConfig(): void {
   const required = [
     { key: 'SENSIO_API_KEY', value: CONFIG.sensio.apiKey },
+    { key: 'SENSIO_USER_ID', value: CONFIG.sensio.userId },
     { key: 'SUPABASE_URL', value: CONFIG.supabase.url },
     { key: 'SUPABASE_SERVICE_KEY', value: CONFIG.supabase.serviceKey },
   ];
